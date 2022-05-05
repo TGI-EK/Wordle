@@ -3,5 +3,6 @@ module wordlegruppe.wordle {
     requires javafx.fxml;
 
     opens wordlegruppe.wordle to javafx.fxml;
-    exports wordlegruppe.wordle;
+    exports wordlegruppe.wordle.ui;
+    opens wordlegruppe.wordle.ui to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package wordlegruppe.wordle;
+package wordlegruppe.wordle.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

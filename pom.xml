@@ -36,7 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>wordlegruppe.wordle.ui.App</mainClass>
+                    <mainClass>wordlegruppe.wordle.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>

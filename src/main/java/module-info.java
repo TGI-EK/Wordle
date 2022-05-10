@@ -5,4 +5,5 @@ module wordlegruppe.wordle {
     opens wordlegruppe.wordle to javafx.fxml;
     exports wordlegruppe.wordle.ui;
     opens wordlegruppe.wordle.ui to javafx.fxml;
+    exports wordlegruppe.wordle;
 }

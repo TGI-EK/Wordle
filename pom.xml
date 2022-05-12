@@ -3,7 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>wordlegruppe</groupId>
     <artifactId>Wordle</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <!--Version can't contain letters because of jpackage-->
+    <version>1.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
@@ -81,7 +82,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-
+                <version>2.4</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -102,6 +103,36 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!--suppress GrazieInspection -->
+                <groupId>com.github.akman</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>0.1.3</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jpackage</goal>
+                        </goals>
+                        <configuration>
+                            <toolhome>${env.JAVA_HOME}</toolhome>
+                            <resourcedir>${project.build.directory}</resourcedir>
+                            <input>${project.build.directory}</input>
+                            <mainjar>${project.name}-${project.version}.jar</mainjar>
+                            <dest>${project.build.directory}/jpackage</dest>
+                            <name>Wordle</name>
+                            <type>MSI</type>
+                            <appversion>${project.version}</appversion>
+                            <description>Wordle Game</description>
+                            <vendor>Wordle Gruppe TGI-EK 2022</vendor>
+                            <windirchooser>true</windirchooser>
+                            <winmenu>true</winmenu>
+                            <winshortcut>true</winshortcut>
+                            <winperuserinstall>true</winperuserinstall>
                         </configuration>
                     </execution>
                 </executions>

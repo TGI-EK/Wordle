@@ -23,7 +23,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.setTitle("Wordle");
-        InputStream icon = getClass().getResourceAsStream("icon-p2.png");
+        InputStream icon = getClass().getResourceAsStream("icon-p1.png");
         assert icon != null;
         stage.getIcons().add(new Image(icon));
         stage.show();

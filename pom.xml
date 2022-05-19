@@ -144,7 +144,7 @@
                             <winmenu>true</winmenu>
                             <winshortcut>true</winshortcut>
                             <winperuserinstall>true</winperuserinstall>
-                            <icon>${project.basedir}/src/main/resources/wordlegruppe/wordle/icon-p2.ico</icon>
+                            <icon>${project.basedir}/src/main/resources/wordlegruppe/wordle/icon-p1.ico</icon>
                         </configuration>
                     </execution>
                 </executions>

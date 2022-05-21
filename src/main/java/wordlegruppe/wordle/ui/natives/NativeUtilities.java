@@ -12,7 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import wordlegruppe.wordle.ui.SecondaryController;
+import wordlegruppe.wordle.ui.controllers.SecondaryController;
 import wordlegruppe.wordle.ui.natives.structs.DWMWINDOWATTRIBUTE;
 
 import java.io.IOException;
@@ -92,7 +92,6 @@ public class NativeUtilities {
         int blue = (int) (color.getBlue() * 255);
         // win api accepts the colors in reverse order
         int rgb = red + green * 16 * 16 + blue * 16 * 16 * 16 * 16;
-        System.out.printf("%02X %02X %02X %06X\n", red, green, blue, rgb);
         WinNT.HRESULT res = DwmApi.INSTANCE.DwmSetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR, new IntByReference(rgb), 4);
         return res.longValue() >= 0;
     }

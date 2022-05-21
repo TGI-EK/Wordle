@@ -1,4 +1,4 @@
-package wordlegruppe.wordle.ui;
+package wordlegruppe.wordle.ui.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

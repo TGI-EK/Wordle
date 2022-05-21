@@ -10,4 +10,6 @@ module wordlegruppe.wordle {
     exports wordlegruppe.wordle.ui;
     opens wordlegruppe.wordle.ui.natives;
     exports wordlegruppe.wordle.ui.natives;
+    exports wordlegruppe.wordle.ui.natives.structs;
+    opens wordlegruppe.wordle.ui.natives.structs;
 }

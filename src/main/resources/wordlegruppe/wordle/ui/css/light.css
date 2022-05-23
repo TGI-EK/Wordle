@@ -25,8 +25,6 @@
 .box {
     -fx-background-color: white;
     -fx-border-color: #AFAFAF;
-    -fx-pref-height: 14px;
-    -fx-pref-width: 14px;
 }
 
 .check-box:focused .box {

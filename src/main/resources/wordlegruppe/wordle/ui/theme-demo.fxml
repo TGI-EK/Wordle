@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="600.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.ThemeDemoController">
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#onBtnLightPress" text="Light" />
+            <Button mnemonicParsing="false" onAction="#onBtnDarkPress" text="Dark">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+        </buttons>
+         <opaqueInsets>
+            <Insets right="40.0" />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets left="20.0" right="20.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </ButtonBar>
+   </bottom>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Text" />
+            <CheckBox mnemonicParsing="false" styleClass="controls" text="CheckBox" />
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+   </left>
+</BorderPane>

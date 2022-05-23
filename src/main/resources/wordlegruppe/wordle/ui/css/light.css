@@ -1,5 +1,42 @@
 /* styles for light mode */
 
+* {
+    -fx-text-fill: black;
+}
+
 .root {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #F2F2F2;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-border-color: #C2C2C2;
+}
+
+.button:hover {
+    -fx-background-color: #F7F7F7;
+    -fx-border-color: #89B0D4;
+}
+
+.button:focused {
+    -fx-border-color: #89B0D4;
+}
+
+.box {
+    -fx-background-color: white;
+    -fx-border-color: #AFAFAF;
+    -fx-pref-height: 14px;
+    -fx-pref-width: 14px;
+}
+
+.check-box:focused .box {
+    -fx-border-color: #89B0D4;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #4E9DE7;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
 }

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public enum Theme {
-    LIGHT(getStylePath("light.css"), Color.WHITE),
-    DARK(getStylePath("dark.css"), Color.web("#3B3B3B")),
+    LIGHT(getStylePath("light.css"), Color.web("#F2F2F2")),
+    DARK(getStylePath("dark.css"), Color.web("#3C3F41")),
     DEFAULT;
 
     private String globalStylesheet;
@@ -34,6 +34,7 @@ public enum Theme {
     private static Theme defaultTheme;
     // should be replaced with the update to an ObservableTheme
     private static final List<Consumer<ThemeUpdateEvent>> updateListeners = new ArrayList<>();
+    private static final List<List<String>> usedStylesheets = new ArrayList<>();
 
     public static void setTheme(Theme theme) {
         Theme prev = currentTheme;
@@ -42,6 +43,10 @@ public enum Theme {
         else
             Theme.currentTheme = theme;
 
+        usedStylesheets.forEach(list -> {
+            list.remove(prev.globalStylesheet);
+            list.add(currentTheme.globalStylesheet);
+        });
         updateListeners.forEach(listener -> listener.accept(new ThemeUpdateEvent(prev, theme)));
     }
 
@@ -59,12 +64,21 @@ public enum Theme {
         updateListeners.add(listener);
     }
 
+    public static void addStylesheetList(List<String> stylesheets) {
+        usedStylesheets.add(stylesheets);
+        stylesheets.add(currentTheme.globalStylesheet);
+    }
+
     public static void removeUpdateListener(Consumer<ThemeUpdateEvent> listener) {
         updateListeners.remove(listener);
     }
 
+    public static void removeStylesheetList(List<String> stylesheets) {
+        usedStylesheets.remove(stylesheets);
+    }
+
     private static Theme getDefaultTheme() {
-        return DARK;
+        return LIGHT;
     }
 
     private static String getStylePath(String file) {

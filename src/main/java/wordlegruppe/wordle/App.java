@@ -58,7 +58,7 @@ public class App extends Application {
     }
 
     public static URL getUIResource(String name) {
-        return App.class.getClassLoader().getResource("wordlegruppe/wordle/ui/" + name);
+        return App.class.getResource("/wordlegruppe/wordle/ui/" + name);
     }
 
     public static void main(String[] args) {

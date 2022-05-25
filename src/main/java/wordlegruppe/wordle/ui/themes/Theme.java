@@ -2,6 +2,7 @@ package wordlegruppe.wordle.ui.themes;
 
 import javafx.scene.paint.Color;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -82,6 +83,11 @@ public enum Theme {
     }
 
     private static String getStylePath(String file) {
-        return "file:" + Theme.class.getClassLoader().getResource("wordlegruppe/wordle/ui/css/" + file).getFile();
+        URL url = Theme.class.getClassLoader().getResource("wordlegruppe/wordle/ui/css/" + file);
+        if (url == null) {
+            return null;
+        } else {
+            return url.toExternalForm();
+        }
     }
 }

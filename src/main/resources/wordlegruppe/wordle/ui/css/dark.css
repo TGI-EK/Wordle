@@ -7,7 +7,7 @@
 .root {
     -fx-background-color: #3C3F41;
 }
-
+/* buttons */
 .button {
     -fx-background-color: #4E5052;
     -fx-border-color: #606263;
@@ -22,15 +22,20 @@
     -fx-border-color: #446E9E;
 }
 
+/* check boxes */
 .box {
     -fx-background-color: #46494B;
     -fx-border-color: #696B6D;
 }
 
-.check-box:focused .box {
+.check-box:hover .box {
     -fx-border-color: #446E9E;
 }
 
 .check-box:selected .mark {
     -fx-background-color: #A7A7A7;
+}
+
+.check-box:focused .box {
+    -fx-border-color: #446E9E;
 }

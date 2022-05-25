@@ -27,14 +27,12 @@
       </ButtonBar>
    </bottom>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Text" />
-            <CheckBox mnemonicParsing="false" styleClass="controls" text="CheckBox" />
-         </children>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </VBox>
+       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+           <padding>
+               <Insets top="20.0"/>
+           </padding>
+           <Label text="Text"/>
+           <CheckBox mnemonicParsing="false" text="CheckBox"/>
+       </VBox>
    </left>
 </BorderPane>

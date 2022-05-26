@@ -67,20 +67,21 @@ public class NativeUtilities {
     }
 
     /**
-     * Enables the Immersive Dark Mode for a specified stage
+     * Enables/disables the Immersive Dark Mode for a specified stage
      * officially only supported (documented) since Win 11 Build 22000
      * @param stage the stage to enable the Dark mode for
+     * @param enabled if immersive dark mod should be enabled
      * @return if Immersive Dark Mode could be enabled successfully
      */
-    public static boolean enableImmersiveDarkMode(Stage stage) {
+    public static boolean setImmersiveDarkMode(Stage stage, boolean enabled) {
         WinDef.HWND hWnd = getHwnd(stage);
-        WinNT.HRESULT res = DwmApi.INSTANCE.DwmSetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, new IntByReference(1), 4);
+        WinNT.HRESULT res = DwmApi.INSTANCE.DwmSetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE, new IntByReference(enabled ? 1 : 0), 4);
         return res.longValue() >= 0;
     }
 
     /**
      * Sets the Caption Color of the specified Stage to the specified Color
-     * this is only officially supported/documented since Win 11 Build 22000
+     * this does only work since Win 11 Build 22000
      * @param stage the Stage to change the Caption Color
      * @param color the Color to use
      * @return if the change was successful
@@ -96,4 +97,24 @@ public class NativeUtilities {
         return res.longValue() >= 0;
     }
 
+    /**
+     * sets the caption to the specified color if supported
+     * if not supported uses immersive dark mode if color is mostly dark
+     * @param stage the stage to modify
+     * @param color the color to set the caption
+     * @return if the stage was modified
+     */
+    public static boolean customizeCation(Stage stage, Color color) {
+        boolean success = setCaptionColor(stage, color);
+        if(!success) {
+            int red = (int) (color.getRed() * 255);
+            int green = (int) (color.getGreen() * 255);
+            int blue = (int) (color.getBlue() * 255);
+            int colorSum = red + green + blue;
+
+            boolean dark = colorSum < 255 * 3 / 2;
+            success = setImmersiveDarkMode(stage, dark);
+        }
+        return success;
+    }
 }

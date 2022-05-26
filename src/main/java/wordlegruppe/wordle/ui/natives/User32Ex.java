@@ -29,4 +29,7 @@ public interface User32Ex extends User32 {
 
     // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getsystemmetricsfordpi
     int GetSystemMetricsForDpi( int nIndex, int dpi );
+
+    // https://docs.microsoft.com/de-DE/windows/win32/api/winuser/nf-winuser-getdcex
+    HDC GetDCEx(HWND hWnd, HRGN hrgnClip, int flags);
 }

@@ -79,7 +79,7 @@ public enum Theme {
     }
 
     private static Theme getDefaultTheme() {
-        return LIGHT;
+        return DARK;
     }
 
     private static String getStylePath(String file) {

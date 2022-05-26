@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import wordlegruppe.wordle.ui.controllers.EndscreenController;
+import wordlegruppe.wordle.ui.controllers.GameController;
 import wordlegruppe.wordle.ui.controllers.ThemeDemoController;
 import wordlegruppe.wordle.ui.natives.NativeUtilities;
+import wordlegruppe.wordle.ui.natives.WndProc;
 import wordlegruppe.wordle.ui.themes.Theme;
 import wordlegruppe.wordle.ui.themes.ThemeUpdateEvent;
 
@@ -28,7 +30,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         Theme.init();
 
-        scene = new Scene(ThemeDemoController.load()/*loadFXML("primary")*/, 640, 480);
+        scene = new Scene(GameController.load()/*loadFXML("primary")*/, 600, 600);
         mainStage = stage;
 
         stage.setScene(scene);
@@ -37,11 +39,11 @@ public class App extends Application {
         InputStream icon = getClass().getResourceAsStream("icon-p2.png");
         assert icon != null;
         stage.getIcons().add(new Image(icon));
-
+        stage.setResizable(false);
         stage.show();
 
         Theme.addUpdateListener(this::onThemeChanged);
-        NativeUtilities.setCaptionColor(stage, Theme.getCurrentTheme().getCaptionColor());
+        NativeUtilities.customizeCation(stage, Theme.getCurrentTheme().getCaptionColor());
     }
 
     public static void setRoot(Parent root) {

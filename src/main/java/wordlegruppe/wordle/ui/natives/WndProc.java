@@ -34,7 +34,10 @@ public class WndProc implements WinUser.WindowProc {
     private static final int HTSYSMENU = 3;
     private static final int DFC_CAPTION = 1;
     private static final int DFC_BUTTON = 4;
+    private static final int DFCS_BUTTON3STATE = 8;
     private static final int DFCS_CAPTIONCLOSE = 0;
+    private static final int DCX_WINDOW = 1;
+    private static final int DCX_INTERSECTRGN = 128;
 
     private final Stage stage;
     private final HWND hWnd;
@@ -45,7 +48,7 @@ public class WndProc implements WinUser.WindowProc {
     public WndProc(Stage stage) {
         this.stage = stage;
 
-        NativeUtilities.addFrame(stage.getScene());
+        //NativeUtilities.addFrame(stage.getScene());
 
         stage.getScene().rootProperty().addListener((observableValue, oldRoot, newRoot) -> {
 
@@ -68,10 +71,10 @@ public class WndProc implements WinUser.WindowProc {
     @Override
     public LRESULT callback(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
         return switch (message) {
-            case WM_NCCALCSIZE -> WmNcCalcSize(hWnd, message, wParam, lParam);
+            //case WM_NCCALCSIZE -> WmNcCalcSize(hWnd, message, wParam, lParam);
             //case WM_ACTIVATE -> WmActivate(hWnd, message, wParam, lParam);
             //case WM_NCHITTEST -> WmNcHitTest(hWnd, message, wParam, lParam);
-            //case WM_NCPAINT -> WmNcPaint(hWnd, message, wParam, lParam);
+            case WM_NCPAINT -> WmNcPaint(hWnd, message, wParam, lParam);
             //case WM_SIZE -> WmSize(hWnd, message, wParam, lParam);
             //case WM_NCMOUSEMOVE -> WmNcMouseMove(hWnd, message, wParam, lParam);
             default -> User32Ex.INSTANCE.CallWindowProc(defWndProc, hWnd, message, wParam, lParam);
@@ -160,10 +163,10 @@ public class WndProc implements WinUser.WindowProc {
 
     private LRESULT WmNcPaint(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
         LRESULT lResult = User32Ex.INSTANCE.CallWindowProc(defWndProc, hWnd, message, wParam, lParam);
-        HDC hdc = User32.INSTANCE.GetDC(hWnd);
+        HDC hdc = User32Ex.INSTANCE.GetDCEx(hWnd, new HRGN(wParam.toPointer()), DCX_WINDOW | DCX_INTERSECTRGN);
         RECT rc = new RECT();
         User32.INSTANCE.GetClientRect(hWnd, rc);
-        User32Ex.INSTANCE.DrawFrameControl(hdc, rc, DFC_CAPTION, DFCS_CAPTIONCLOSE);
+        //User32Ex.INSTANCE.DrawFrameControl(hdc, rc, DFC_BUTTON, DFCS_BUTTON3STATE);
         User32.INSTANCE.ReleaseDC(hWnd, hdc);
         return lResult;
     }

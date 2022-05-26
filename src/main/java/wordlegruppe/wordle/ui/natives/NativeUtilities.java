@@ -92,7 +92,7 @@ public class NativeUtilities {
         int green = (int) (color.getGreen() * 255);
         int blue = (int) (color.getBlue() * 255);
         // win api accepts the colors in reverse order
-        int rgb = red + green * 16 * 16 + blue * 16 * 16 * 16 * 16;
+        int rgb = red + (green << 8) + (blue << 16);
         WinNT.HRESULT res = DwmApi.INSTANCE.DwmSetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.DWMWA_CAPTION_COLOR, new IntByReference(rgb), 4);
         return res.longValue() >= 0;
     }

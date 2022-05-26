@@ -5,12 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import wordlegruppe.wordle.ui.controllers.EndscreenController;
 import wordlegruppe.wordle.ui.controllers.GameController;
-import wordlegruppe.wordle.ui.controllers.ThemeDemoController;
 import wordlegruppe.wordle.ui.natives.NativeUtilities;
-import wordlegruppe.wordle.ui.natives.WndProc;
 import wordlegruppe.wordle.ui.themes.Theme;
 import wordlegruppe.wordle.ui.themes.ThemeUpdateEvent;
 
@@ -23,14 +22,19 @@ import java.net.URL;
  */
 public class App extends Application {
 
+    private static App instance;
     private static Scene scene;
     private static Stage mainStage;
 
+    private Object controller;
+
     @Override
     public void start(Stage stage) throws IOException {
+        instance = this;
         Theme.init();
 
-        scene = new Scene(GameController.load()/*loadFXML("primary")*/, 600, 600);
+        scene = new Scene(GameController.getLoader().load(), 600, 600);
+        controller = GameController.getLoader().getController();
         mainStage = stage;
 
         stage.setScene(scene);
@@ -43,20 +47,35 @@ public class App extends Application {
         stage.show();
 
         Theme.addUpdateListener(this::onThemeChanged);
+        scene.addEventHandler(KeyEvent.KEY_TYPED, this::onKeyTyped);
         NativeUtilities.customizeCation(stage, Theme.getCurrentTheme().getCaptionColor());
     }
 
-    public static void setRoot(Parent root) {
-        scene.setRoot(root);
+    public static void setRoot(FXMLLoader loader) {
+        try {
+            instance.controller = loader.getController();
+            scene.setRoot(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onThemeChanged(ThemeUpdateEvent e) {
-        NativeUtilities.setCaptionColor(mainStage, e.getNewTheme().getCaptionColor());
+        NativeUtilities.customizeCation(mainStage, e.getNewTheme().getCaptionColor());
     }
 
-    public static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getUIResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+    private void onKeyTyped(KeyEvent e) {
+        // only trigger if GameController ist used
+        if(!(controller instanceof GameController c)) return;
+        c.onKeyTyped(e);
+    }
+
+    public static FXMLLoader getFXMLLoader(String fxml) {
+        return new FXMLLoader(getUIResource(fxml + ".fxml"));
+    }
+
+    public static Scene getScene() {
+        return scene;
     }
 
     public static URL getUIResource(String name) {

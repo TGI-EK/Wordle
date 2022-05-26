@@ -39,3 +39,13 @@
 .check-box:focused .box {
     -fx-border-color: #446E9E;
 }
+
+/* game view stuff */
+.wordle-letter-box {
+    -fx-background-color: #4E5052;
+    -fx-border-color: #606263;
+}
+
+.title {
+    -fx-fill: #AFB1B3;
+}

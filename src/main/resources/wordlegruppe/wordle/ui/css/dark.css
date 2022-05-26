@@ -1,0 +1,36 @@
+/* styles for dark mode */
+
+* {
+    -fx-text-fill: #AFB1B3;
+}
+
+.root {
+    -fx-background-color: #3C3F41;
+}
+
+.button {
+    -fx-background-color: #4E5052;
+    -fx-border-color: #606263;
+}
+
+.button:hover {
+    -fx-background-color: #55585A;
+    -fx-border-color: #446E9E;
+}
+
+.button:focused {
+    -fx-border-color: #446E9E;
+}
+
+.box {
+    -fx-background-color: #46494B;
+    -fx-border-color: #696B6D;
+}
+
+.check-box:focused .box {
+    -fx-border-color: #446E9E;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #A7A7A7;
+}

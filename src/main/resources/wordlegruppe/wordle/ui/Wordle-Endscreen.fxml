@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.EndscreenController">
+   <children>
+      <HBox prefHeight="81.0" prefWidth="600.0" style="-fx-background-color: #2e3136;">
+         <children>
+            <Label prefHeight="100.0" prefWidth="600.0" text="          Du hast gewonnen" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="35.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label prefHeight="40.0" prefWidth="652.0" style="-fx-background-color: #2e3136;" text="                      Du hast das Wort erraten" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="25.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="66.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="61.0" prefWidth="150.0" style="-fx-background-color: #2e3136;" text="Label" textFill="WHITE" translateX="220.0">
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="85.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #2e3136;" text="Label" textAlignment="CENTER" textFill="WHITE" translateX="170.0">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</VBox>

@@ -14,7 +14,7 @@ public enum LetterResult {
         this.color = color;
     }
 
-    Color getCorrespondingColor() {
+    public Color getCorrespondingColor() {
         return color;
     }
 }

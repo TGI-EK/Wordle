@@ -2,10 +2,8 @@ package wordlegruppe.wordle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import wordlegruppe.wordle.ui.controllers.GameController;
@@ -49,6 +47,11 @@ public class App extends Application {
         Theme.addUpdateListener(this::onThemeChanged);
         scene.addEventHandler(KeyEvent.KEY_TYPED, this::onKeyTyped);
         NativeUtilities.customizeCation(stage, Theme.getCurrentTheme().getCaptionColor());
+
+        if(isWin10())
+            NativeUtilities.reopenWindow(mainStage);
+
+        System.out.println(System.getProperties());
     }
 
     public static void setRoot(FXMLLoader loader) {
@@ -62,12 +65,22 @@ public class App extends Application {
 
     private void onThemeChanged(ThemeUpdateEvent e) {
         NativeUtilities.customizeCation(mainStage, e.getNewTheme().getCaptionColor());
+        if(isWin10())
+            NativeUtilities.reopenWindow(mainStage);
     }
 
     private void onKeyTyped(KeyEvent e) {
         // only trigger if GameController ist used
         if(!(controller instanceof GameController c)) return;
         c.onKeyTyped(e);
+    }
+
+    public static boolean isWin10() {
+        return isWin() && System.getProperty("os.version").equals("10.0");
+    }
+
+    public static boolean isWin() {
+        return System.getProperty("os.name").toLowerCase().startsWith("windows");
     }
 
     public static FXMLLoader getFXMLLoader(String fxml) {

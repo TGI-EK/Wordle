@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="settings">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+      <ChoiceBox accessibleHelp="Test1" accessibleRole="BUTTON" accessibleRoleDescription="Test2" accessibleText="Test" prefWidth="150.0">
+         <VBox.margin>
+            <Insets bottom="7.0" />
+         </VBox.margin>
+      </ChoiceBox>
+      <CheckBox mnemonicParsing="false" text="Schwierigkeit" />
+   </children>
+</VBox>

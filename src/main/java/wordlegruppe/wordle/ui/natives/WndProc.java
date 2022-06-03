@@ -50,10 +50,10 @@ public class WndProc implements WinUser.WindowProc {
 
         //NativeUtilities.addFrame(stage.getScene());
 
-        stage.getScene().rootProperty().addListener((observableValue, oldRoot, newRoot) -> {
+        //stage.getScene().rootProperty().addListener((observableValue, oldRoot, newRoot) -> {
 
-            NativeUtilities.addFrame(stage.getScene());
-        });
+        //    NativeUtilities.addFrame(stage.getScene());
+        //});
 
         this.hWnd = NativeUtilities.getHwnd(stage);
         this.defWndProc = User32Ex.INSTANCE.SetWindowLongPtr(hWnd, WinUser.GWL_WNDPROC, this);
@@ -62,6 +62,24 @@ public class WndProc implements WinUser.WindowProc {
         RECT rect = new RECT();
         User32.INSTANCE.GetWindowRect(hWnd, rect);
         User32.INSTANCE.SetWindowPos(hWnd, null, rect.left, rect.top, RECTWIDTH(rect), RECTHEIGHT(rect), WinUser.SWP_FRAMECHANGED);
+
+        init(hWnd);
+    }
+
+    private void init(HWND hWnd) {
+        MARGINS margins = new MARGINS();
+        margins.cyTopHeight = 30;
+        margins.cyBottomHeight = 0;
+        margins.cxRightWidth = 0;
+        margins.cxLeftWidth = 0;
+
+        RECT frame = new RECT();
+        int dpi = User32Ex.INSTANCE.GetDpiForWindow(hWnd);
+        User32Ex.INSTANCE.AdjustWindowRectExForDpi(frame, User32Ex.INSTANCE.GetWindowLong(hWnd, WinUser.GWL_STYLE), false, 0, dpi);
+
+        margins.cyTopHeight = -frame.top;
+        WinNT.HRESULT res = DwmApi.INSTANCE.DwmExtendFrameIntoClientArea(hWnd, margins);
+        System.out.println("DwmExtednREs: " + res.longValue());
     }
 
     public void uninstall() {
@@ -71,11 +89,11 @@ public class WndProc implements WinUser.WindowProc {
     @Override
     public LRESULT callback(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
         return switch (message) {
-            //case WM_NCCALCSIZE -> WmNcCalcSize(hWnd, message, wParam, lParam);
-            //case WM_ACTIVATE -> WmActivate(hWnd, message, wParam, lParam);
-            //case WM_NCHITTEST -> WmNcHitTest(hWnd, message, wParam, lParam);
-            case WM_NCPAINT -> WmNcPaint(hWnd, message, wParam, lParam);
-            //case WM_SIZE -> WmSize(hWnd, message, wParam, lParam);
+            case WM_NCCALCSIZE -> WmNcCalcSize(hWnd, message, wParam, lParam);
+            case WM_ACTIVATE -> WmActivate(hWnd, message, wParam, lParam);
+            case WM_NCHITTEST -> WmNcHitTest(hWnd, message, wParam, lParam);
+            //case WM_NCPAINT -> WmNcPaint(hWnd, message, wParam, lParam);
+            case WM_SIZE -> WmSize(hWnd, message, wParam, lParam);
             //case WM_NCMOUSEMOVE -> WmNcMouseMove(hWnd, message, wParam, lParam);
             default -> User32Ex.INSTANCE.CallWindowProc(defWndProc, hWnd, message, wParam, lParam);
             //default -> User32.INSTANCE.DefWindowProc(hWnd, message, wParam, lParam);
@@ -106,7 +124,7 @@ public class WndProc implements WinUser.WindowProc {
         params.rgrc[0].top = originalTop;
         params.write();
 
-        boolean isMaximized = User32Ex.INSTANCE.IsZoomed(hWnd);
+        /*boolean isMaximized = User32Ex.INSTANCE.IsZoomed(hWnd);
         boolean isFullscreen = stage.isFullScreen();
 
         if(isMaximized && !isFullscreen) {
@@ -131,34 +149,36 @@ public class WndProc implements WinUser.WindowProc {
 
             }
         }
-        params.write();
+        params.write();*/
         return lResult;
     }
 
     private LRESULT WmNcHitTest(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
         // TODO
         LRESULT lResult = User32Ex.INSTANCE.CallWindowProc(defWndProc, hWnd, message, wParam, lParam);
-        //if(lResult.longValue() != HTCLIENT)
+        if(lResult.longValue() != HTCLIENT)
             return lResult;
 
-        //return new LRESULT(HTMAXBUTTON);
+        return new LRESULT(HTCAPTION);
     }
 
     private LRESULT WmActivate(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
-        MARGINS margins = new MARGINS();
-        margins.cxLeftWidth = 8;
-        margins.cxRightWidth = 8;
-        margins.cyBottomHeight = 20;
-        margins.cyTopHeight = 37;
-
-        WinNT.HRESULT hr = DwmApi.INSTANCE.DwmExtendFrameIntoClientArea(hWnd, margins);
-        // error
-        if(hr.longValue() < 0) {
-            System.out.println("error on DwmExtendFrameIntoClientArea");
-        } else {
-            System.out.println("success");
-        }
-        return User32.INSTANCE.DefWindowProc(hWnd, message, wParam, lParam);
+        //init(hWnd);
+        return DefWndProc(hWnd, message, wParam, lParam);
+//        MARGINS margins = new MARGINS();
+//        margins.cxLeftWidth = 8;
+//        margins.cxRightWidth = 8;
+//        margins.cyBottomHeight = 20;
+//        margins.cyTopHeight = 37;
+//
+//        WinNT.HRESULT hr = DwmApi.INSTANCE.DwmExtendFrameIntoClientArea(hWnd, margins);
+//        // error
+//        if(hr.longValue() < 0) {
+//            System.out.println("error on DwmExtendFrameIntoClientArea");
+//        } else {
+//            System.out.println("success");
+//        }
+//        return User32.INSTANCE.DefWindowProc(hWnd, message, wParam, lParam);
     }
 
     private LRESULT WmNcPaint(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
@@ -166,14 +186,20 @@ public class WndProc implements WinUser.WindowProc {
         HDC hdc = User32Ex.INSTANCE.GetDCEx(hWnd, new HRGN(wParam.toPointer()), DCX_WINDOW | DCX_INTERSECTRGN);
         RECT rc = new RECT();
         User32.INSTANCE.GetClientRect(hWnd, rc);
-        //User32Ex.INSTANCE.DrawFrameControl(hdc, rc, DFC_BUTTON, DFCS_BUTTON3STATE);
+        User32Ex.INSTANCE.DrawFrameControl(hdc, rc, DFC_CAPTION, DFCS_CAPTIONCLOSE);
         User32.INSTANCE.ReleaseDC(hWnd, hdc);
         return lResult;
     }
 
     private LRESULT WmSize(HWND hWnd, int message, WPARAM wParam, LPARAM lParam) {
-        if(wmSizeWparam >= 0)
-            wParam = new WPARAM(wmSizeWparam);
+        int height = HIWORD(lParam);
+        height -= 30;
+        long newLParam = (long) height << 16;
+        newLParam += LOWORD(lParam);
+        lParam.setValue(newLParam);
+        //if(wmSizeWparam >= 0)
+        //    wParam = new WPARAM(wmSizeWparam);
+        System.out.println(height);
         return User32Ex.INSTANCE.CallWindowProc(defWndProc, hWnd, message, wParam, lParam);
     }
 
@@ -226,6 +252,13 @@ public class WndProc implements WinUser.WindowProc {
 
     private int RECTHEIGHT(RECT rc) {
         return rc.bottom - rc.top;
+    }
+
+    private int HIWORD(BaseTSD.LONG_PTR lParam) {
+        return (short) ((lParam.longValue() >> 16) & 0xffff);
+    }
+    private int LOWORD(BaseTSD.LONG_PTR lParam) {
+        return (short) (lParam.longValue() & 0xffff);
     }
 
     private int GET_Y_LPARAM(BaseTSD.LONG_PTR lParam) {

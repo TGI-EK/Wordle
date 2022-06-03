@@ -32,4 +32,7 @@ public interface User32Ex extends User32 {
 
     // https://docs.microsoft.com/de-DE/windows/win32/api/winuser/nf-winuser-getdcex
     HDC GetDCEx(HWND hWnd, HRGN hrgnClip, int flags);
+
+    // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi
+    boolean AdjustWindowRectExForDpi(RECT lpRect, int dwStyle, boolean bMenu, int dwExStyle, int dpi);
 }

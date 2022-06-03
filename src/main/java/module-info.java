@@ -3,6 +3,7 @@ module wordlegruppe.wordle {
     requires javafx.fxml;
     requires com.sun.jna.platform;
     requires com.sun.jna;
+    requires java.base;
 
     opens wordlegruppe.wordle;
     exports wordlegruppe.wordle;

@@ -30,6 +30,7 @@ public class Game {
         this.active = true;
         this.tries = 0;
         this.wordToGuess = wordList.randomWord();
+        System.out.println("DEBUG: word to guess:"+wordToGuess);
     }
 
     /**
@@ -76,20 +77,25 @@ public class Game {
         this.won = Game.isWon(results);
         if(this.won) {
             win();
-        } else if(this.tries > 5) {
+        } else if(this.tries == 5) {
             lose();
         }
+        tries += 1;
         return new SubmitResult(results, this.won);
     }
 
     private void win() {
         // TODO
-        throw new UnsupportedOperationException("not implemented");
+        active = false;
+        System.out.println("You Won");
+        //throw new UnsupportedOperationException("not implemented");
     }
 
     private void lose() {
         // TODO
-        throw new UnsupportedOperationException("not implemented");
+        active = false;
+        System.out.println("You Lose");
+        //throw new UnsupportedOperationException("not implemented");
     }
 
     /**

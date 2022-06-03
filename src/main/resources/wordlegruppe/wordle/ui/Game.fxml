@@ -165,14 +165,6 @@
                   <Font name="Arial Bold" size="40.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-            </Label>
             <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="2" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets top="3.0" />
@@ -189,7 +181,7 @@
                   <Font name="Arial Bold" size="40.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="4" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets top="3.0" />
                </GridPane.margin>
@@ -198,6 +190,22 @@
                </font>
             </Label>
             <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets top="3.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets top="3.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Arial Bold" size="40.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets top="3.0" />
                </GridPane.margin>
@@ -260,14 +268,6 @@
                <font>
                   <Font name="Arial Bold" size="40.0" />
                </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="85.0" prefWidth="85.0" styleClass="wordle-letter-box"  GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Arial Bold" size="40.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets top="3.0" />
-               </GridPane.margin>
             </Label>
          </children>
       </GridPane>

@@ -4,6 +4,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
+import com.sun.jna.platform.win32.WinUser;
 import com.sun.jna.ptr.IntByReference;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -67,6 +68,19 @@ public class NativeUtilities {
     }
 
     /**
+     * Used to minimize and reopen a window to
+     * update title bar on Win 10
+     * use this instead of the JavaFX way to prevent
+     * ugly window movement
+     * @param stage the stage to reopen
+     */
+    public static void reopenWindow(Stage stage) {
+        WinDef.HWND hWnd = getHwnd(stage);
+        User32Ex.INSTANCE.ShowWindow(hWnd, WinUser.SW_HIDE);
+        User32.INSTANCE.ShowWindow(hWnd, WinUser.SW_SHOW);
+    }
+
+    /**
      * Enables/disables the Immersive Dark Mode for a specified stage
      * officially only supported (documented) since Win 11 Build 22000
      * @param stage the stage to enable the Dark mode for
@@ -116,5 +130,13 @@ public class NativeUtilities {
             success = setImmersiveDarkMode(stage, dark);
         }
         return success;
+    }
+
+    private static int RECTWIDTH(WinDef.RECT rc) {
+        return rc.right - rc.left;
+    }
+
+    private static int RECTHEIGHT(WinDef.RECT rc) {
+        return rc.bottom - rc.top;
     }
 }

@@ -4,10 +4,12 @@ public class SubmitResult {
 
     private final LetterResult[] wordRes;
     private final boolean won;
+    private final boolean gameOver;
 
-    public SubmitResult(LetterResult[] wordRes, boolean won) {
+    public SubmitResult(LetterResult[] wordRes, boolean won, boolean isOver) {
         this.won = won;
         this.wordRes = wordRes;
+        this.gameOver = isOver;
     }
 
     public LetterResult[] getWordRes() {
@@ -16,5 +18,9 @@ public class SubmitResult {
 
     public boolean isWon() {
         return won;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }

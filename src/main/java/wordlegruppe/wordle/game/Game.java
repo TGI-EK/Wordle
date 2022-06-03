@@ -81,7 +81,7 @@ public class Game {
             lose();
         }
         tries += 1;
-        return new SubmitResult(results, this.won);
+        return new SubmitResult(results, this.won, !active);
     }
 
     private void win() {

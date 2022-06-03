@@ -38,8 +38,11 @@ public class ThemeDemoController implements Initializable {
     }
 
 
-    public static Parent load() throws IOException {
-        return FXMLLoader.load(App.getUIResource("theme-demo.fxml"));
+    private static FXMLLoader loader;
+    public static FXMLLoader getLoader() {
+        if(loader == null)
+            loader = new FXMLLoader(App.getUIResource("theme-demo.fxml"));
+        return loader;
     }
 
 }

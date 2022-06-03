@@ -13,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import wordlegruppe.wordle.ui.controllers.SecondaryController;
 import wordlegruppe.wordle.ui.natives.structs.DWMWINDOWATTRIBUTE;
 
 import java.io.IOException;
@@ -54,18 +53,6 @@ public class NativeUtilities {
         return new WinDef.HWND(pointer);
     }
 
-    public static void addFrame(Scene scene) {
-        Parent appRoot = scene.getRoot();
-        FXMLLoader loader = new FXMLLoader(SecondaryController.class.getResource("frame.fxml"));
-
-        try {
-            BorderPane borderPane = loader.load();
-            borderPane.setCenter(appRoot);
-            scene.setRoot(borderPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Used to minimize and reopen a window to

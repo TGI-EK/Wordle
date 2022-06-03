@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import wordlegruppe.wordle.ui.controllers.GameController;
+import wordlegruppe.wordle.ui.controllers.TitleController;
 import wordlegruppe.wordle.ui.natives.NativeUtilities;
 import wordlegruppe.wordle.ui.themes.Theme;
 import wordlegruppe.wordle.ui.themes.ThemeUpdateEvent;
@@ -31,8 +32,8 @@ public class App extends Application {
         instance = this;
         Theme.init();
 
-        scene = new Scene(GameController.getLoader().load(), 600, 600);
-        controller = GameController.getLoader().getController();
+        scene = new Scene(TitleController.getLoader().load(), 600, 600);
+        controller = TitleController.getLoader().getController();
         mainStage = stage;
 
         stage.setScene(scene);
@@ -54,15 +55,6 @@ public class App extends Application {
         System.out.println(System.getProperties());
     }
 
-    public static void setRoot(FXMLLoader loader) {
-        try {
-            instance.controller = loader.getController();
-            scene.setRoot(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void onThemeChanged(ThemeUpdateEvent e) {
         NativeUtilities.customizeCation(mainStage, e.getNewTheme().getCaptionColor());
         if(isWin10())
@@ -73,6 +65,15 @@ public class App extends Application {
         // only trigger if GameController ist used
         if(!(controller instanceof GameController c)) return;
         c.onKeyTyped(e);
+    }
+
+    public static void setRoot(FXMLLoader loader) {
+        try {
+            scene.setRoot(loader.load());
+            instance.controller = loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static boolean isWin10() {

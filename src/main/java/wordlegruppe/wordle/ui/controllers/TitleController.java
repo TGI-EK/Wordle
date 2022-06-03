@@ -1,5 +1,7 @@
 package wordlegruppe.wordle.ui.controllers;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -10,12 +12,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TitleController implements Initializable {
-    @javafx.fxml.FXML
+    @FXML
     private VBox root;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Theme.addStylesheetList(root.getStylesheets());
+    }
+
+
+    public void onBtnStartAction(ActionEvent e) {
+        App.setRoot(GameController.getLoader());
+    }
+
+    public void onBtnSettingsAction(ActionEvent e) {
+        App.setRoot(SettingController.getLoader());
+    }
+
+    public void onBtnQuitAction(ActionEvent e) {
+        System.exit(0);
     }
 
     private static FXMLLoader loader;
@@ -24,4 +39,5 @@ public class TitleController implements Initializable {
             loader = new FXMLLoader(App.getUIResource("Titlescreen.fxml"));
         return loader;
     }
+
 }

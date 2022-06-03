@@ -28,6 +28,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import wordlegruppe.wordle.App;
+import wordlegruppe.wordle.game.SubmitResult;
 import wordlegruppe.wordle.game.WordList;
 import wordlegruppe.wordle.ui.themes.Theme;
 
@@ -35,12 +36,14 @@ import wordlegruppe.wordle.ui.themes.Theme;
  * FXML Controller class
  *
  * @author Christos
+ * @author YetiHafen
+ * @author Ichmagmathe
  */
 public class GameController implements Initializable {
 
     private String currentWord = "";
     private int rowIndex = 0;
-    private Game game = new Game();
+    private final Game game = new Game();
     private final WordList wordList = new WordList();
 
     @FXML
@@ -113,7 +116,15 @@ public class GameController implements Initializable {
             if(wordList.contains(currentWord))
             {
                 //Change color for specific case; don't forget lowerCase :C
-                LetterResult[] result = game.submitWord(currentWord.toLowerCase()).getWordRes();
+                SubmitResult submitResult = game.submitWord(currentWord.toLowerCase());
+
+                if(submitResult.isGameOver()) {
+                    App.setRoot(EndscreenController.getLoader());
+                    return;
+                }
+
+                LetterResult[] result = submitResult.getWordRes();
+
                 for(int i = 0; i < 5; i++) {
                     Node node = grid.getChildren().get(5*rowIndex + i);
                     if(node instanceof Label label) 
@@ -124,7 +135,7 @@ public class GameController implements Initializable {
                 }
                 currentWord = "";
                 rowIndex += 1;
-            }    
+            }
         }
         
         // update UI

@@ -22,30 +22,17 @@ public class EndscreenController implements Initializable {
     @FXML
     public Button btn;
 
-    /**
-     * load the corresponding fxml File
-     * @return the Parent object of the FXML structure
-     */
-    public static Parent createEndscreen() {
-        try {
-            URL fxml = App.getUIResource("Wordle-Endscreen.fxml");
-            assert fxml != null;
-            return FXMLLoader.load(fxml);
-        } catch (IOException | AssertionError e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Theme.addUpdateListener(this::onThemeUpdate);
+        Theme.addStylesheetList(root.getStylesheets());
     }
 
-    // called when the theme was changed
-    public void onThemeUpdate(ThemeUpdateEvent e) {
-        // replace the stylesheets on the root component
-        root.getStylesheets().remove(e.getOldTheme().getGlobalStylesheet());
-        root.getStylesheets().add(e.getNewTheme().getGlobalStylesheet());
+
+    private static FXMLLoader loader;
+    public static FXMLLoader getLoader() {
+        if(loader == null)
+            loader = new FXMLLoader(App.getUIResource("Wordle-endscreen.fxml"));
+        return loader;
     }
 }

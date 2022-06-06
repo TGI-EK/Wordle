@@ -141,11 +141,11 @@ public class GameController implements Initializable {
         // update UI
         if(game.isActive()) updateDisplayedWord();
     }
-
+    
     private static FXMLLoader loader;
     public static FXMLLoader getLoader() {
-        if(loader == null)
-            loader = new FXMLLoader(App.getUIResource("Game.fxml"));
+        //if(loader == null)
+        loader = new FXMLLoader(App.getUIResource("Game.fxml"));
         return loader;
     }
 }

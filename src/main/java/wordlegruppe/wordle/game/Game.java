@@ -13,8 +13,8 @@ public class Game {
 
     private String wordToGuess;
     private boolean active;
-    private boolean won;
-    private int tries;
+    private static boolean won;
+    private static int tries;
 
     public Game() {
         this.wordList = new WordList();
@@ -87,14 +87,12 @@ public class Game {
     private void win() {
         // TODO
         active = false;
-        System.out.println("You Won");
         //throw new UnsupportedOperationException("not implemented");
     }
 
     private void lose() {
         // TODO
         active = false;
-        System.out.println("You Lose");
         //throw new UnsupportedOperationException("not implemented");
     }
 
@@ -131,10 +129,15 @@ public class Game {
      * check if the game is won
      * @return if the game is won
      */
-    public boolean isWon() {
-        return this.won;
+    public static boolean isWon() {
+        return won;
     }
-
+    
+    public static int getTries()
+    {
+        return tries;
+    }
+    
     /**
      * Check current game state
      * @return if the game is active

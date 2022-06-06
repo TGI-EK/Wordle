@@ -40,6 +40,26 @@
     -fx-border-color: #446E9E;
 }
 
+/* choice box */
+.choice-box {
+    -fx-background-color: #46494B;
+    -fx-border-color: #616365;
+}
+
+.choice-box:focused {
+    -fx-border-color: #446E9E;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #46494B;
+    -fx-border-color: #5D6061;
+    -fx-mark-color: white;
+}
+
+.choice-box .menu-item:hover, .choice-box .menu-item:focused {
+    -fx-background-color: #4B6EAF;
+}
+
 /* game view stuff */
 .wordle-letter-box {
     -fx-background-color: #4E5052;

@@ -32,7 +32,7 @@ public class EndscreenController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Theme.addStylesheetList(root.getStylesheets());
-        setEndGameText(Game.isWon(), Game.getTries());
+        setEndGameText(Game.getMostRecentGame().isWon(), Game.getMostRecentGame().getTries());
     }
     
     public void setEndGameText(boolean won, int tries)
@@ -56,11 +56,8 @@ public class EndscreenController implements Initializable {
     {
         App.setRoot(GameController.getLoader());
     }
-        
-    private static FXMLLoader loader;
-    public static FXMLLoader getLoader() {
-        //if(loader == null)
-        loader = new FXMLLoader(App.getUIResource("Wordle-endscreen.fxml"));
-        return loader;
+
+    public static FXMLLoader createLoader() {
+        return new FXMLLoader(App.getUIResource("Wordle-endscreen.fxml"));
     }
 }

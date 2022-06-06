@@ -20,6 +20,21 @@
     C78.477,17.894,78.477,18.586,78.049,19.015z";
 }
 
+/* choice box */
+.choice-box {
+    -fx-border-radius: 2px;
+}
+
+.choice-box:focused {
+    -fx-border-width: 3px;
+    -fx-border-radius: 4px;
+}
+
+.choice-box .context-menu {
+    -fx-border-width: 1px;
+    -fx-mark-color: white;
+}
+
 /* game view stuff */
 .wordle-letter-box {
     -fx-border-radius: 3px;

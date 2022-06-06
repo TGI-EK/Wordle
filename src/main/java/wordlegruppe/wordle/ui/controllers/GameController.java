@@ -119,7 +119,7 @@ public class GameController implements Initializable {
                 SubmitResult submitResult = game.submitWord(currentWord.toLowerCase());
 
                 if(submitResult.isGameOver()) {
-                    App.setRoot(EndscreenController.getLoader());
+                    App.setRoot(EndscreenController.createLoader());
                     return;
                 }
 
@@ -141,11 +141,8 @@ public class GameController implements Initializable {
         // update UI
         if(game.isActive()) updateDisplayedWord();
     }
-    
-    private static FXMLLoader loader;
+
     public static FXMLLoader getLoader() {
-        //if(loader == null)
-        loader = new FXMLLoader(App.getUIResource("Game.fxml"));
-        return loader;
+        return new FXMLLoader(App.getUIResource("Game.fxml"));
     }
 }

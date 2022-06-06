@@ -9,14 +9,17 @@ import java.util.Map;
  */
 public class Game {
 
+    private static Game mostRecentGame;
+
     private final WordList wordList;
 
     private String wordToGuess;
     private boolean active;
-    private static boolean won;
-    private static int tries;
+    private boolean won;
+    private int tries;
 
     public Game() {
+        Game.mostRecentGame = this;
         this.wordList = new WordList();
     }
 
@@ -125,15 +128,19 @@ public class Game {
         return true;
     }
 
+    public static Game getMostRecentGame() {
+        return mostRecentGame;
+    }
+
     /**
      * check if the game is won
      * @return if the game is won
      */
-    public static boolean isWon() {
+    public boolean isWon() {
         return won;
     }
     
-    public static int getTries()
+    public int getTries()
     {
         return tries;
     }

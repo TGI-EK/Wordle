@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="wordlegruppe.wordle.ui.controllers.SettingController" fx:id="root" stylesheets="@css/global.css" styleClass="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="settings">
          <font>
             <Font size="72.0" />
          </font>
       </Label>
-      <ChoiceBox accessibleRoleDescription="Test2" prefWidth="150.0">
+      <ChoiceBox fx:id="choiceBox" accessibleRoleDescription="Test2" prefWidth="150.0">
          <VBox.margin>
             <Insets bottom="7.0" />
          </VBox.margin>

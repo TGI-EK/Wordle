@@ -51,8 +51,6 @@ public class App extends Application {
 
         if(isWin10())
             NativeUtilities.reopenWindow(mainStage);
-
-        System.out.println(System.getProperties());
     }
 
     private void onThemeChanged(ThemeUpdateEvent e) {

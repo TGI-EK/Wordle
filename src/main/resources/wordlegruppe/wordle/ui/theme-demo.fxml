@@ -27,12 +27,13 @@
       </ButtonBar>
    </bottom>
    <left>
-       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+       <VBox alignment="TOP_CENTER" prefHeight="440.0" prefWidth="167.0" spacing="10.0" BorderPane.alignment="CENTER">
            <padding>
-               <Insets top="20.0"/>
+               <Insets left="20.0" right="20.0" top="20.0" />
            </padding>
-           <Label text="Text"/>
-           <CheckBox mnemonicParsing="false" text="CheckBox"/>
+           <Label text="Text" />
+           <CheckBox mnemonicParsing="false" text="CheckBox" />
+         <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
        </VBox>
    </left>
 </BorderPane>

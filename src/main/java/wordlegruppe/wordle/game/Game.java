@@ -17,6 +17,7 @@ public class Game {
     private boolean active;
     private boolean won;
     private int tries;
+    private boolean hardMode;
 
     public Game() {
         Game.mostRecentGame = this;
@@ -31,6 +32,7 @@ public class Game {
         if(this.active) throw new IllegalStateException("Game already running");
 
         this.active = true;
+        this.hardMode = Difficulty.getRecentDifficulty().getHardMode();
         this.tries = 0;
         this.wordToGuess = wordList.randomWord();
         System.out.println("DEBUG: word to guess:"+wordToGuess);
@@ -71,7 +73,9 @@ public class Game {
 
             if(occurrences <= timesHandled) {
                 results[i] = LetterResult.WRONG;
-            } else {
+            } else if(hardMode){
+                results[i] = LetterResult.WRONG;
+            }else{           
                 results[i] = LetterResult.PART_RIGHT;
             }
         }

@@ -5,10 +5,8 @@
  */
 package wordlegruppe.wordle.ui.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import wordlegruppe.wordle.game.Game;
 import wordlegruppe.wordle.game.LetterResult;
@@ -19,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;

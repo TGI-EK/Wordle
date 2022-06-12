@@ -10,6 +10,10 @@ import wordlegruppe.wordle.ui.themes.Theme;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.BooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.scene.control.CheckBox;
+import wordlegruppe.wordle.game.Difficulty;
 
 public class SettingController implements Initializable {
 
@@ -18,7 +22,8 @@ public class SettingController implements Initializable {
 
     @FXML
     private ChoiceBox<Theme> choiceBox;
-
+    @FXML
+    private CheckBox HardMode;
     /**
      * Called to initialize a controller after its root element has been
      * completely processed.
@@ -35,12 +40,22 @@ public class SettingController implements Initializable {
         choiceBox.getItems().add(Theme.LIGHT);
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((value, n1, n2) -> Theme.setTheme(value.getValue()));
+        
+        HardMode.setSelected(Difficulty.getRecentDifficulty().getHardMode());
     }
 
-    private static FXMLLoader loader;
-    public static FXMLLoader getLoader() {
-        if(loader == null)
-            loader = new FXMLLoader(App.getUIResource("settings.fxml"));
-        return loader;
+    @FXML
+    private void setHardMode(ActionEvent event) {
+        BooleanProperty selected = HardMode.selectedProperty();
+        Difficulty.getRecentDifficulty().setHardMode(selected.getValue());
     }
+    
+    @FXML
+    private void buttonBack(ActionEvent event) {
+        App.setRoot(TitleController.createLoader());
+    }
+    
+    public static FXMLLoader createLoader() {       
+        return new FXMLLoader(App.getUIResource("settings.fxml"));
+    } 
 }

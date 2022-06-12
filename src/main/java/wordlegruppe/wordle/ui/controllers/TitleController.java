@@ -26,18 +26,15 @@ public class TitleController implements Initializable {
     }
 
     public void onBtnSettingsAction(ActionEvent e) {
-        App.setRoot(SettingController.getLoader());
+        App.setRoot(SettingController.createLoader());
     }
 
     public void onBtnQuitAction(ActionEvent e) {
         System.exit(0);
     }
 
-    private static FXMLLoader loader;
-    public static FXMLLoader getLoader() {
-        if(loader == null)
-            loader = new FXMLLoader(App.getUIResource("Titlescreen.fxml"));
-        return loader;
+    public static FXMLLoader createLoader() {
+        return new FXMLLoader(App.getUIResource("Titlescreen.fxml"));
     }
 
 }

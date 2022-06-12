@@ -4,14 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import wordlegruppe.wordle.App;
 import wordlegruppe.wordle.ui.themes.Theme;
-import wordlegruppe.wordle.ui.themes.ThemeUpdateEvent;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
@@ -39,14 +36,14 @@ public class EndscreenController implements Initializable {
     {
         if(won)
         {
-            LabelWon.setText("Du hast Gewonnen");
-            LabelWonText.setText("Glückwung! Du hast das Wort erraten");
-            LabelTries.setText("Geschaft nach dem "+tries+". Versuch");
+            LabelWon.setText("You won!");
+            LabelWonText.setText("Congrats! You guessed the word");
+            LabelTries.setText("Number of attempts: "+tries);
         }
         else
         {
-            LabelWon.setText("Du hast Verloren");
-            LabelWonText.setText("Schade! Du hast das Wort nicht erraten");
+            LabelWon.setText("You lost!");
+            LabelWonText.setText("Too bad! You have not guessed the word");
             LabelTries.setText("");
         }
     }
@@ -56,8 +53,13 @@ public class EndscreenController implements Initializable {
     {
         App.setRoot(GameController.getLoader());
     }
-
+    
+    @FXML
+    private void buttonBack(ActionEvent event) {
+        App.setRoot(TitleController.createLoader());
+    }
+         
     public static FXMLLoader createLoader() {
         return new FXMLLoader(App.getUIResource("Wordle-endscreen.fxml"));
     }
-}
+}    

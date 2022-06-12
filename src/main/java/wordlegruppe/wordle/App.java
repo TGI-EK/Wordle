@@ -32,8 +32,8 @@ public class App extends Application {
         instance = this;
         Theme.init();
 
-        scene = new Scene(TitleController.getLoader().load(), 600, 600);
-        controller = TitleController.getLoader().getController();
+        scene = new Scene(TitleController.createLoader().load(), 600, 600);
+        controller = TitleController.createLoader().getController();
         mainStage = stage;
 
         stage.setScene(scene);

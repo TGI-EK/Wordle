@@ -1,7 +1,6 @@
 package wordlegruppe.wordle.game;
 
 /**
- *
  * @author Oliver Schneider
  */
 public class Difficulty {

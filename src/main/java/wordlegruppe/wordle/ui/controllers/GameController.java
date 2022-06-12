@@ -127,7 +127,8 @@ public class GameController implements Initializable {
                     if(node instanceof Label label) 
                     {
                         Color color = result[i].getCorrespondingColor();
-                        label.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
+                        Insets insets = label.getInsets();
+                        label.setBackground(new Background(new BackgroundFill(color, null, insets)));
                     }
                 }
                 currentWord = "";

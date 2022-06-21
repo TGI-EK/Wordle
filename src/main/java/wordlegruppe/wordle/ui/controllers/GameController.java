@@ -7,6 +7,7 @@ package wordlegruppe.wordle.ui.controllers;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import wordlegruppe.wordle.game.Game;
 import wordlegruppe.wordle.game.LetterResult;
@@ -21,10 +22,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import wordlegruppe.wordle.App;
+import wordlegruppe.wordle.game.Difficulty;
 import wordlegruppe.wordle.game.SubmitResult;
 import wordlegruppe.wordle.game.WordList;
 import wordlegruppe.wordle.ui.themes.Theme;
@@ -39,7 +40,10 @@ import wordlegruppe.wordle.ui.themes.Theme;
 public class GameController implements Initializable {
 
     private String currentWord = "";
+    private String lastWord;
+    private LetterResult[] lastResult;
     private int rowIndex = 0;
+    private boolean hardMode = false;
     private final Game game = new Game();
     private final WordList wordList = new WordList();
 
@@ -57,6 +61,7 @@ public class GameController implements Initializable {
         Theme.addStylesheetList(root.getStylesheets());    
         // Game starting   
         game.start();      
+        this.hardMode = Difficulty.INSTANCE.getHardMode();
     }
 
     private void updateDisplayedWord() {
@@ -112,34 +117,86 @@ public class GameController implements Initializable {
         {
             if(wordList.contains(currentWord))
             {
-                //Change color for specific case; don't forget lowerCase :C
-                SubmitResult submitResult = game.submitWord(currentWord.toLowerCase());
+                if(hardMode && checkForChar()){
+                    SubmitResult submitResult = game.submitWord(currentWord.toLowerCase());
 
-                if(submitResult.isGameOver()) {
-                    App.setRoot(EndscreenController.createLoader());
-                    return;
-                }
-
-                LetterResult[] result = submitResult.getWordRes();
-
-                for(int i = 0; i < 5; i++) {
-                    Node node = grid.getChildren().get(5*rowIndex + i);
-                    if(node instanceof Label label) 
-                    {
-                        Color color = result[i].getCorrespondingColor();
-                        Insets insets = label.getInsets();
-                        label.setBackground(new Background(new BackgroundFill(color, null, insets)));
+                    if(submitResult.isGameOver()) {
+                        App.setRoot(EndscreenController.createLoader());
+                        return;
                     }
+
+                    LetterResult[] result = submitResult.getWordRes();
+                    
+                    changeColor(result);
+                    
+                    lastWord = currentWord;
+                    lastResult = result;
+                    currentWord = "";
+                    rowIndex += 1;
                 }
-                currentWord = "";
-                rowIndex += 1;
+                else if(!hardMode)
+                {
+                    SubmitResult submitResult = game.submitWord(currentWord.toLowerCase());
+
+                    if(submitResult.isGameOver()) {
+                        App.setRoot(EndscreenController.createLoader());
+                        return;
+                    }
+
+                    LetterResult[] result = submitResult.getWordRes();
+        
+                    changeColor(result);
+                    
+                    currentWord = "";
+                    rowIndex += 1;
+                }
             }
         }
         
         // update UI
         if(game.isActive()) updateDisplayedWord();
     }
-
+    
+    //Etwas mehr Uebersichtlichkeit
+    private void changeColor(LetterResult[] result){
+        //Change color for specific case; don't forget lowerCase :C
+        
+        for(int i = 0; i < 5; i++) {
+            Node node = grid.getChildren().get(5*rowIndex + i);
+            if(node instanceof Label label) 
+            {
+                Color color = result[i].getCorrespondingColor();
+                Insets insets = label.getInsets();
+                label.setBackground(new Background(new BackgroundFill(color, null, insets)));
+            }
+        }
+    }
+    
+    private boolean checkForChar(){
+        if(lastWord == null && lastResult == null) return true;
+        char[] chars = lastWord.toCharArray();
+        char[] currentWordChars = currentWord.toCharArray();
+        int charsRight = 0;
+        Boolean[] isValid = new Boolean[5];
+        
+        for(int i = 0; i < lastResult.length; i++){
+            if(lastResult[i].toString() == "PART_RIGHT" || lastResult[i].toString() == "FULL_RIGHT")
+            {
+                for(int j = 0; j < currentWordChars.length; j++){
+                    if(currentWordChars[j] == chars[i]){
+                        isValid[i] = true;
+                        currentWordChars[j] = ' '; 
+                        break;
+                    }
+                    else isValid[i] = false;
+                }
+                charsRight++;
+            }
+        }
+        //Check ob genau so viele "true" im Array sind wie richtige buchstaben      
+        return (int)Arrays.stream(isValid).filter(c -> c != null && c == true).count() == charsRight;  
+    }
+    
     public static FXMLLoader getLoader() {
         return new FXMLLoader(App.getUIResource("Game.fxml"));
     }

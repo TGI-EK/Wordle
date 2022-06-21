@@ -20,7 +20,7 @@
             <Insets bottom="7.0" />
          </VBox.margin>
       </ChoiceBox>
-      <CheckBox fx:id="HardMode" mnemonicParsing="false" onAction="#setHardMode" prefHeight="30.0" prefWidth="150.0" text="Schwierigkeit">
+      <CheckBox fx:id="HardMode" mnemonicParsing="false" onAction="#setHardMode" prefHeight="30.0" prefWidth="150.0" text="Hardcore">
          <font>
             <Font size="14.0" />
          </font></CheckBox>

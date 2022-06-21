@@ -1,7 +1,6 @@
 package wordlegruppe.wordle.game;
 
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ public class Game {
     private boolean active;
     private boolean won;
     private int tries;
-    private boolean hardMode;
 
     public Game() {
         Game.mostRecentGame = this;
@@ -33,7 +31,6 @@ public class Game {
         if(this.active) throw new IllegalStateException("Game already running");
 
         this.active = true;
-        this.hardMode = Difficulty.INSTANCE.getHardMode();
         this.tries = 0;
         this.wordToGuess = wordList.randomWord();
         System.out.println("DEBUG: word to guess:"+wordToGuess);
@@ -97,7 +94,7 @@ public class Game {
             boolean notOverused = timesHandled < countCharsInString(wordToGuess, currentChar);
             boolean notCorrectGuessed = timesHandled < correctChars.getOrDefault(currentChar, Integer.MAX_VALUE) - 1;
 
-            if(notOverused && notCorrectGuessed && !hardMode)
+            if(notOverused && notCorrectGuessed)
                 results[i] = LetterResult.PART_RIGHT;
             else
                 results[i] = LetterResult.WRONG;

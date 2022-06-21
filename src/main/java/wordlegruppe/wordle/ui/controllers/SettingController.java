@@ -24,6 +24,7 @@ public class SettingController implements Initializable {
     private ChoiceBox<Theme> choiceBox;
     @FXML
     private CheckBox HardMode;
+
     /**
      * Called to initialize a controller after its root element has been
      * completely processed.
@@ -41,13 +42,13 @@ public class SettingController implements Initializable {
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((value, n1, n2) -> Theme.setTheme(value.getValue()));
         
-        HardMode.setSelected(Difficulty.getRecentDifficulty().getHardMode());
+        HardMode.setSelected(Difficulty.INSTANCE.getHardMode());
     }
 
     @FXML
     private void setHardMode(ActionEvent event) {
         BooleanProperty selected = HardMode.selectedProperty();
-        Difficulty.getRecentDifficulty().setHardMode(selected.getValue());
+        Difficulty.INSTANCE.setHardMode(selected.getValue());
     }
     
     @FXML

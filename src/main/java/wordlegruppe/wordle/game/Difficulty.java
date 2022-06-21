@@ -5,7 +5,7 @@ package wordlegruppe.wordle.game;
  */
 public class Difficulty {
     
-    private static final Difficulty recentDifficulty = new Difficulty();
+    public static final Difficulty INSTANCE = new Difficulty();
     
     private boolean hardMode;
     
@@ -17,10 +17,5 @@ public class Difficulty {
     public boolean getHardMode()
     {
         return hardMode;     
-    }
-    
-    public static Difficulty getRecentDifficulty()
-    {
-        return recentDifficulty;
     }
 }

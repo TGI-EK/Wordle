@@ -1,6 +1,7 @@
 package wordlegruppe.wordle.game;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public class Game {
         if(this.active) throw new IllegalStateException("Game already running");
 
         this.active = true;
-        this.hardMode = Difficulty.getRecentDifficulty().getHardMode();
+        this.hardMode = Difficulty.INSTANCE.getHardMode();
         this.tries = 0;
         this.wordToGuess = wordList.randomWord();
         System.out.println("DEBUG: word to guess:"+wordToGuess);
@@ -49,58 +50,59 @@ public class Game {
         assert active;
         assert word.length() == 5;
 
+        LetterResult[] results = checkMatches(word);
+
+        this.won = Game.isWon(results);
+        if(this.won || this.tries >= 5) {
+            this.active = false;
+        }
+        tries += 1;
+        return new SubmitResult(results, this.won, !active);
+    }
+
+
+    private LetterResult[] checkMatches(String word) {
+
         LetterResult[] results = new LetterResult[5];
 
-        Map<Character, Integer> handledMultiOccurrences = new HashMap<>();
+        Map<Character, Integer> correctChars = new HashMap<>();
 
         for(int i = 0; i < word.length(); i++) {
             char currentChar = word.charAt(i);
 
-            int occurrences = countCharsInString(wordToGuess, currentChar);
+            int occurrencesInOriginal = countCharsInString(wordToGuess, currentChar);
 
-            int timesHandled = handledMultiOccurrences.getOrDefault(currentChar, 0);
-            handledMultiOccurrences.put(currentChar, timesHandled + 1);
-
-            if(occurrences == 0) {
+            if(occurrencesInOriginal == 0) {
                 results[i] = LetterResult.WRONG;
                 continue;
             }
 
             if(currentChar == wordToGuess.charAt(i)) {
                 results[i] = LetterResult.FULL_RIGHT;
-                continue;
+                int correct = correctChars.getOrDefault(currentChar, 0);
+                correctChars.put(currentChar, correct + 1);
             }
+        }
 
-            if(occurrences <= timesHandled) {
-                results[i] = LetterResult.WRONG;
-            } else if(hardMode){
-                results[i] = LetterResult.WRONG;
-            }else{           
+        Map<Character, Integer> handledMultiOccurrences = new HashMap<>();
+
+        for(int i = 0; i < word.length(); i++) {
+            if(results[i] != null) continue;
+
+            char currentChar = word.charAt(i);
+
+            int timesHandled = handledMultiOccurrences.getOrDefault(currentChar, 0);
+            handledMultiOccurrences.put(currentChar, timesHandled + 1);
+
+            boolean notOverused = timesHandled < countCharsInString(wordToGuess, currentChar);
+            boolean notCorrectGuessed = timesHandled < correctChars.getOrDefault(currentChar, Integer.MAX_VALUE) - 1;
+
+            if(notOverused && notCorrectGuessed && !hardMode)
                 results[i] = LetterResult.PART_RIGHT;
-            }
+            else
+                results[i] = LetterResult.WRONG;
         }
-
-
-        this.won = Game.isWon(results);
-        if(this.won) {
-            win();
-        } else if(this.tries == 5) {
-            lose();
-        }
-        tries += 1;
-        return new SubmitResult(results, this.won, !active);
-    }
-
-    private void win() {
-        // TODO
-        active = false;
-        //throw new UnsupportedOperationException("not implemented");
-    }
-
-    private void lose() {
-        // TODO
-        active = false;
-        //throw new UnsupportedOperationException("not implemented");
+        return results;
     }
 
     /**

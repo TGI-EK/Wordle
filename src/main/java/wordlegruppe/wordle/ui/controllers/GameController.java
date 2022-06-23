@@ -9,6 +9,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
+
+import javafx.animation.AnimationTimer;
 import wordlegruppe.wordle.game.Game;
 import wordlegruppe.wordle.game.LetterResult;
 
@@ -59,8 +62,8 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Theme.addStylesheetList(root.getStylesheets());    
-        // Game starting   
-        game.start();      
+        // Game starting
+        game.start();
         this.hardMode = Difficulty.INSTANCE.getHardMode();
     }
 
@@ -126,9 +129,9 @@ public class GameController implements Initializable {
                     }
 
                     LetterResult[] result = submitResult.getWordRes();
-                    
+
                     changeColor(result);
-                    
+
                     lastWord = currentWord;
                     lastResult = result;
                     currentWord = "";
@@ -144,26 +147,28 @@ public class GameController implements Initializable {
                     }
 
                     LetterResult[] result = submitResult.getWordRes();
-        
+
                     changeColor(result);
-                    
+
                     currentWord = "";
                     rowIndex += 1;
                 }
+            } else {
+                new WiggleTimer().start();
             }
-        }
-        
+        } else if(isEnter) new WiggleTimer().start();
+
         // update UI
         if(game.isActive()) updateDisplayedWord();
     }
-    
+
     //Etwas mehr Uebersichtlichkeit
-    private void changeColor(LetterResult[] result){
+    private void changeColor(LetterResult[] result) {
         //Change color for specific case; don't forget lowerCase :C
-        
+
         for(int i = 0; i < 5; i++) {
             Node node = grid.getChildren().get(5*rowIndex + i);
-            if(node instanceof Label label) 
+            if(node instanceof Label label)
             {
                 Color color = result[i].getCorrespondingColor();
                 Insets insets = label.getInsets();
@@ -171,21 +176,22 @@ public class GameController implements Initializable {
             }
         }
     }
-    
-    private boolean checkForChar(){
+
+    private boolean checkForChar() {
         if(lastWord == null && lastResult == null) return true;
+        assert lastWord != null;
         char[] chars = lastWord.toCharArray();
         char[] currentWordChars = currentWord.toCharArray();
         int charsRight = 0;
         Boolean[] isValid = new Boolean[5];
-        
+
         for(int i = 0; i < lastResult.length; i++){
-            if(lastResult[i].toString() == "PART_RIGHT" || lastResult[i].toString() == "FULL_RIGHT")
+            if(lastResult[i].toString().equals("PART_RIGHT") || lastResult[i].toString().equals("FULL_RIGHT"))
             {
                 for(int j = 0; j < currentWordChars.length; j++){
                     if(currentWordChars[j] == chars[i]){
                         isValid[i] = true;
-                        currentWordChars[j] = ' '; 
+                        currentWordChars[j] = ' ';
                         break;
                     }
                     else isValid[i] = false;
@@ -193,10 +199,31 @@ public class GameController implements Initializable {
                 charsRight++;
             }
         }
-        //Check ob genau so viele "true" im Array sind wie richtige buchstaben      
-        return (int)Arrays.stream(isValid).filter(c -> c != null && c == true).count() == charsRight;  
+        //Check ob genau so viele "true" im Array sind wie richtige buchstaben
+        return (int)Arrays.stream(isValid).filter(c -> c != null && c).count() == charsRight;
     }
-    
+
+    private class WiggleTimer extends AnimationTimer {
+        private int a = 360;
+        @Override
+        public void handle(long now) {
+            if((a -= 10) <= 0) {
+                stop();
+                applyInRow(rowIndex, label -> label.setTranslateX(0));
+                return;
+            }
+
+            applyInRow(rowIndex, label -> label.setTranslateX(Math.sin(a)*10));
+        }
+
+        private void applyInRow(int row, Consumer<Label> action) {
+            for(int i = 0; i < 5; i++) {
+                Node node = grid.getChildren().get(5*row+i);
+                if(node instanceof Label label) action.accept(label);
+            }
+        }
+    }
+
     public static FXMLLoader getLoader() {
         return new FXMLLoader(App.getUIResource("Game.fxml"));
     }

@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.layout.*;
 import wordlegruppe.wordle.game.Game;
 import wordlegruppe.wordle.game.LetterResult;
 
@@ -22,10 +23,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import wordlegruppe.wordle.App;
 import wordlegruppe.wordle.game.Difficulty;
@@ -51,7 +48,7 @@ public class GameController implements Initializable {
     private final WordList wordList = new WordList();
 
     @FXML
-    private AnchorPane root;
+    private Pane root;
 
     @FXML
     private GridPane grid;

@@ -42,7 +42,8 @@ public class App extends Application {
         InputStream icon = getClass().getResourceAsStream("icon-p2.png");
         assert icon != null;
         stage.getIcons().add(new Image(icon));
-        stage.setResizable(false);
+        stage.setMinHeight(600);
+        stage.setMinWidth(600);
         stage.show();
 
         Theme.addUpdateListener(this::onThemeChanged);

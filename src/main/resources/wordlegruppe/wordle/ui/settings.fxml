@@ -10,7 +10,7 @@
 
 <VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="379.0" styleClass="root" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.SettingController">
    <children>
-      <Label text="settings">
+      <Label text="Settings">
          <font>
             <Font size="72.0" />
          </font>

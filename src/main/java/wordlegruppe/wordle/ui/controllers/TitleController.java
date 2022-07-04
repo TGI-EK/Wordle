@@ -11,6 +11,10 @@ import wordlegruppe.wordle.ui.themes.Theme;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author YetiHafen (Florian Fezer)
+ * @author Ichmagmathe (Oliver Schneider)
+ */
 public class TitleController implements Initializable {
     @FXML
     private VBox root;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author YetiHafen
+ * @author YetiHafen (Florian Fezer)
  */
 public class Game {
 

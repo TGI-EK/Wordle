@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import wordlegruppe.wordle.game.Game;
 
+/**
+ * @author Ichmagmathe (Oliver Schneider)
+ */
 public class EndscreenController implements Initializable {
 
     @FXML

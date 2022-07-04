@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 
 /**
  * utilities for interactions with the Win32Api
- * @author YetiHafen
+ * @author YetiHafen (Florian Fezer)
  */
 public class NativeUtilities {
 
@@ -63,7 +63,7 @@ public class NativeUtilities {
      */
     public static void reopenWindow(Stage stage) {
         WinDef.HWND hWnd = getHwnd(stage);
-        User32Ex.INSTANCE.ShowWindow(hWnd, WinUser.SW_HIDE);
+        User32.INSTANCE.ShowWindow(hWnd, WinUser.SW_HIDE);
         User32.INSTANCE.ShowWindow(hWnd, WinUser.SW_SHOW);
     }
 
@@ -117,13 +117,5 @@ public class NativeUtilities {
             success = setImmersiveDarkMode(stage, dark);
         }
         return success;
-    }
-
-    private static int RECTWIDTH(WinDef.RECT rc) {
-        return rc.right - rc.left;
-    }
-
-    private static int RECTHEIGHT(WinDef.RECT rc) {
-        return rc.bottom - rc.top;
     }
 }

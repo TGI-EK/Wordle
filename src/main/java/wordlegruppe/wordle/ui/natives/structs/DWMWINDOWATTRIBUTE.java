@@ -2,7 +2,7 @@ package wordlegruppe.wordle.ui.natives.structs;
 
 /**
  * https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
- * @author YetiHafen
+ * @author YetiHafen (Florian Fezer)
  */
 public class DWMWINDOWATTRIBUTE {
     public static final int DWMWA_NCRENDERING_ENABLED = 0;

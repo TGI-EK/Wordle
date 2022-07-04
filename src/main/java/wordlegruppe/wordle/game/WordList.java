@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
- * @author Oliver Schneider
+ * @author Ichmagmathe (Oliver Schneider)
+ * @author YetiHafen (Florian Fezer) (refactor)
  */
 public class WordList {
 

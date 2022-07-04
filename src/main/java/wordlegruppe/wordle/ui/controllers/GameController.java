@@ -33,9 +33,8 @@ import wordlegruppe.wordle.ui.themes.Theme;
 /**
  * FXML Controller class
  *
- * @author Christos
- * @author YetiHafen
- * @author Ichmagmathe
+ * @author YetiHafen (Florian Fezer)
+ * @author Ichmagmathe (Oliver Schneider)
  */
 public class GameController implements Initializable {
 
@@ -159,7 +158,7 @@ public class GameController implements Initializable {
         if(game.isActive()) updateDisplayedWord();
     }
 
-    //Etwas mehr Uebersichtlichkeit
+    // etwas mehr Übersichtlichkeit
     private void changeColor(LetterResult[] result) {
         //Change color for specific case; don't forget lowerCase :C
 
@@ -196,7 +195,7 @@ public class GameController implements Initializable {
                 charsRight++;
             }
         }
-        //Check ob genau so viele "true" im Array sind wie richtige buchstaben
+        // check, ob genau so viele "true" im Array sind wie richtige buchstaben
         return (int)Arrays.stream(isValid).filter(c -> c != null && c).count() == charsRight;
     }
 
@@ -210,7 +209,7 @@ public class GameController implements Initializable {
                 return;
             }
 
-            applyInRow(rowIndex, label -> label.setTranslateX(Math.sin(a)*10));
+            applyInRow(rowIndex, label -> label.setTranslateX(Math.sin(a)*5));
         }
 
         private void applyInRow(int row, Consumer<Label> action) {

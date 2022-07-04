@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * @author YetiHafen (Florian Fezer)
+ */
 public enum Theme {
     LIGHT(getStylePath("light.css"), Color.web("#F2F2F2")),
     DARK(getStylePath("dark.css"), Color.web("#3C3F41")),

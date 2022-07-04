@@ -2,6 +2,9 @@ package wordlegruppe.wordle.game;
 
 import javafx.scene.paint.Color;
 
+/**
+ * @author YetiHafen (Florian Fezer)
+ */
 public enum LetterResult {
 
     WRONG(Color.web("#D91818")),

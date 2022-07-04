@@ -18,6 +18,8 @@ import java.net.URL;
 
 /**
  * JavaFX App
+ * @author YetiHafen (Florian Fezer)
+ * @author Ichmagmathe (Oliver Schneider)
  */
 public class App extends Application {
 
@@ -55,7 +57,7 @@ public class App extends Application {
     }
 
     private void onThemeChanged(ThemeUpdateEvent e) {
-        NativeUtilities.customizeCation(mainStage, e.getNewTheme().getCaptionColor());
+        NativeUtilities.customizeCation(mainStage, e.newTheme().getCaptionColor());
         if(isWin10())
             NativeUtilities.reopenWindow(mainStage);
     }
@@ -81,10 +83,6 @@ public class App extends Application {
 
     public static boolean isWin() {
         return System.getProperty("os.name").toLowerCase().startsWith("windows");
-    }
-
-    public static FXMLLoader getFXMLLoader(String fxml) {
-        return new FXMLLoader(getUIResource(fxml + ".fxml"));
     }
 
     public static Scene getScene() {

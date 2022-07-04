@@ -1,5 +1,8 @@
 package wordlegruppe.wordle.game;
 
+/**
+ * @author YetiHafen (Florian Fezer)
+ */
 public class SubmitResult {
 
     private final LetterResult[] wordRes;

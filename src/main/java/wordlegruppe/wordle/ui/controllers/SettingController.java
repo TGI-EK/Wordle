@@ -15,6 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
 import wordlegruppe.wordle.game.Difficulty;
 
+/**
+ * @author YetiHafen (Florian Fezer)
+ */
 public class SettingController implements Initializable {
 
     @FXML

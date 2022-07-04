@@ -69,3 +69,10 @@
 .title {
     -fx-fill: #AFB1B3;
 }
+
+.background-image {
+    -fx-background-image: url('../../wallpaper.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+    -fx-background-position: center center;
+}

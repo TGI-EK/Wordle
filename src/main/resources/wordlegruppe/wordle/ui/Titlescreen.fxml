@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox styleClass="title-section" fx:id="root" alignment="CENTER" prefHeight="375.0" prefWidth="379.0" spacing="5.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.TitleController">
+<VBox styleClass="background-image" fx:id="root" alignment="CENTER" prefHeight="375.0" prefWidth="379.0" spacing="5.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.TitleController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" text="Wordle" textAlignment="CENTER">
          <font>

@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import wordlegruppe.wordle.App;
 import wordlegruppe.wordle.ui.themes.Theme;
@@ -21,7 +20,7 @@ public class EndscreenController implements Initializable {
 
     @FXML
     public VBox root;
-    public Button btn;
+
     @FXML
     private Label LabelWon;
     @FXML
@@ -63,6 +62,6 @@ public class EndscreenController implements Initializable {
     }
          
     public static FXMLLoader createLoader() {
-        return new FXMLLoader(App.getUIResource("Wordle-endscreen.fxml"));
+        return new FXMLLoader(App.getUIResource("Wordle-Endscreen.fxml"));
     }
 }    

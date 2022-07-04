@@ -27,17 +27,17 @@ public class WordList {
 
     private List<String> readDict() {
 
-        try {
-            assert enDict != null;
+        assert enDict != null;
+        try(InputStream enDictIn = enDict.openStream()) {
             // alle bytes der datei lesen
-            byte[] data = Files.readAllBytes(Path.of(enDict.toURI()));
+            byte[] data = enDictIn.readAllBytes();
             // die bytes als String interpretieren und nach Zeilenumbrüchen aufteilen
             // datei ist mit CRLF Zeilenumbrüchen gespeichert, deshalb \r\n
             String[] contents = new String(data, StandardCharsets.UTF_8).split("\r\n");
 
             return Arrays.asList(contents);
 
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

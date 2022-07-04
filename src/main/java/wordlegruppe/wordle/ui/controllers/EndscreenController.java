@@ -50,7 +50,7 @@ public class EndscreenController implements Initializable {
             LabelWon.setText("You lost!");
             LabelWonText.setText("Too bad! You have not guessed the word");
             LabelTries.setText("");
-            rightWordLabel.setText("The right word was: " + rightWord);
+            rightWordLabel.setText("The correct word was: " + rightWord);
         }
     }
     

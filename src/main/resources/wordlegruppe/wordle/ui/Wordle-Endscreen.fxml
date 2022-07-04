@@ -4,8 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.EndscreenController">
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wordlegruppe.wordle.ui.controllers.EndscreenController">
    <children>
       <HBox alignment="CENTER" prefHeight="81.0" prefWidth="600.0">
          <children>
@@ -21,30 +25,30 @@
             <Font size="25.0" />
          </font>
       </Label>
+      <Label fx:id="LabelTries">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
          <children>
-            <Label fx:id="LabelTries" alignment="CENTER" prefHeight="61.0" prefWidth="300.0" textFill="WHITE">
+            <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buttonRestart" prefWidth="200.0" text="New Game" textFill="WHITE">
                <HBox.margin>
-                  <Insets top="3.0" />
+                  <Insets top="10.0" />
                </HBox.margin>
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font size="20.0" />
                </font>
-            </Label>
+            </Button>
          </children>
       </HBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonRestart" prefHeight="60.0" prefWidth="250.0" text="New Game" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-          </font>
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin>
-      </Button>
       <Button mnemonicParsing="false" onAction="#buttonBack" prefWidth="200.0" text="Back">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
       </Button>
    </children>
 </VBox>

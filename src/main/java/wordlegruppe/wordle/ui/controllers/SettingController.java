@@ -42,6 +42,7 @@ public class SettingController implements Initializable {
 
         choiceBox.getItems().add(Theme.DARK);
         choiceBox.getItems().add(Theme.LIGHT);
+        choiceBox.getSelectionModel().select(Theme.getCurrentTheme());
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((value, n1, n2) -> Theme.setTheme(value.getValue()));
         

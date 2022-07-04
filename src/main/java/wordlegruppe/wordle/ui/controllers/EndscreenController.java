@@ -27,26 +27,30 @@ public class EndscreenController implements Initializable {
     private Label LabelWonText;
     @FXML
     private Label LabelTries;
+    @FXML
+    private Label rightWordLabel;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Theme.addStylesheetList(root.getStylesheets());
-        setEndGameText(Game.getMostRecentGame().isWon(), Game.getMostRecentGame().getTries());
+        setEndGameText(Game.getMostRecentGame().isWon(), Game.getMostRecentGame().getTries(), Game.getMostRecentGame().getToGuessingWord());
     }
     
-    public void setEndGameText(boolean won, int tries)
+    public void setEndGameText(boolean won, int tries, String rightWord)
     {
         if(won)
         {
             LabelWon.setText("You won!");
             LabelWonText.setText("Congrats! You guessed the word");
             LabelTries.setText("Number of attempts: "+tries);
+            rightWordLabel.setText("");
         }
         else
         {
             LabelWon.setText("You lost!");
             LabelWonText.setText("Too bad! You have not guessed the word");
             LabelTries.setText("");
+            rightWordLabel.setText("The right word was: " + rightWord);
         }
     }
     

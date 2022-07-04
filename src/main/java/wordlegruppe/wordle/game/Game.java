@@ -143,6 +143,10 @@ public class Game {
         return won;
     }
     
+    public String getToGuessingWord(){
+        return wordToGuess;
+    }
+    
     public int getTries()
     {
         return tries;
